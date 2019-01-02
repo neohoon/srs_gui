@@ -181,11 +181,14 @@ def run_server(server=None):
 
 
 def run_client(url):
-    os.remove(CLIENT_EXE_FNAME)
+    try:
+        os.remove(CLIENT_EXE_FNAME)
+    except:
+        pass
     if sys.platform.startswith('win'):
         with open(CLIENT_EXE_FNAME, "w") as fid:
             fid.write("timeout 3\nstart \"\" " + url)
-        os.system("start /min cmd.exe " + CLIENT_EXE_FNAME)
+        os.system("start /min cmd.exe /c " + CLIENT_EXE_FNAME)
     elif sys.platform.startswith('darwin'):
         with open(CLIENT_EXE_FNAME, "w") as fid:
             fid.write("sleep 3\nopen " + url)
