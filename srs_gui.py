@@ -11,11 +11,11 @@ Send a HEAD request::
 Send a POST request::
     curl -d "foo=bar&bin=baz" http://localhost
 """
-# import os
+import os
 import sys
 import glob
 import serial
-from multiprocessing import Process
+# from multiprocessing import Process
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import webbrowser
@@ -24,6 +24,14 @@ import json
 
 PORT_NUMBER = 8080
 DEFAULT_HTML = "srs_gui.html"
+if sys.platform.startswith('win'):
+    CLIENT_EXE_FNAME = "client.bat"
+elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+    CLIENT_EXE_FNAME = "client.sh"
+elif sys.platform.startswith('darwin'):
+    CLIENT_EXE_FNAME = "client.sh"
+else:
+    CLIENT_EXE_FNAME = ""
 
 
 # This class will handles any incoming request from
@@ -172,15 +180,36 @@ def run_server(server=None):
         server.socket.close()
 
 
+def run_client(url):
+    os.remove(CLIENT_EXE_FNAME)
+    if sys.platform.startswith('win'):
+        with open(CLIENT_EXE_FNAME, "w") as fid:
+            fid.write("timeout 3\nstart \"\" " + url)
+        os.system("start /min cmd.exe " + CLIENT_EXE_FNAME)
+    elif sys.platform.startswith('darwin'):
+        with open(CLIENT_EXE_FNAME, "w") as fid:
+            fid.write("sleep 3\nopen " + url)
+        os.system("chmod u+x " + CLIENT_EXE_FNAME)
+        os.system(CLIENT_EXE_FNAME + "&")
+    elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+        pass
+    else:
+        raise EnvironmentError('Unsupported OS platform')
+
+
 def run(server_class=HTTPServer, handler_class=MyHandler, port=8080):
     server_address = ('', port)
     server = server_class(server_address, handler_class)
     url = "http://localhost:{}".format(port)
+    run_client(url)
+    run_server(server)
+    """
     processes = [Process(target=run_server, args=(server,)), Process(target=run_browser, args=(url,))]
     for p in processes:
         p.start()
     for p in processes:
         p.join()
+    """
 
 
 if __name__ == "__main__":
