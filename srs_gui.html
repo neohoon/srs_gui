@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>SRS Board Control</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script type="text/javascript" src="jquery.3.3.1.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+    <script src="bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="srs_gui.css"/> -->
+    <link rel="shortcut icon" href="about:blank"/>
+
+    <style>
+        #file_browser {
+            display: none;
+        }
+        .uart_dropdown {
+            width: 128px;
+        }
+        .jumbotron {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        th, tr {
+            padding: 4px;
+            font-weight: normal;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="jumbotron text-center" style="margin: 0px; background-color: lightblue;">
+    <h2>SRS Board Control</h2>
+    <p>Board Control GUI and point cloud visualization</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6" align="center" style="border:0px solid black">
+            <h3>Platform Xwr16xx</h3>
+            <table>
+                <tr>
+                    <th>Range Max (mm)</th>
+                    <th> <input type="text" name="range_max" id="range_max" title="range_max"/> </th>
+                </tr>
+                <tr>
+                    <th>Range Resolution (mm)</th>
+                    <th><input type="text" name="range_resol" id="range_resol" title="range_resol"/></th>
+                </tr>
+                <tr>
+                    <th>Velocity Max (mm/sec)</th>
+                    <th><input type="text" name="velocity_max" id="velocity_max" title="velocity_max"/></th>
+                </tr>
+                <tr>
+                    <th>Velocity Resolution (mm/sec)</th>
+                    <th><input type="text" name="velocity_resol" id="velocity_resol" title="velocity_resol"/></th>
+                </tr>
+                <tr>
+                    <th>Frame Duration (msec)</th>
+                    <th><input type="text" name="frame_duration" id="frame_duration" title="frame_duration"/></th>
+                </tr>
+                <tr>
+                    <th>SNR Threshold (dB)</th>
+                    <th><input type="text" name="snr_thresh" id="snr_thresh" title="snr_thresh"></th>
+                </tr>
+                <tr>
+                    <th>Rx Gain (dB)</th>
+                    <th><input type="text" name="rx_gain" id="rx_gain" title="rx_gain"></th>
+                </tr>
+                <tr>
+                    <th>Power Backoff (dB)</th>
+                    <th><input type="text" name="power_backoff" id="power_backoff" title="power_backoff"/></th>
+                </tr>
+                <tr>
+                    <th>MTI weight (0..99)</th>
+                    <th><input type="text" name="mti_weight" id="mti_weight" title="mti_weight"/></th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-sm-6" align="center">
+            <h3>UART Configuration</h3>
+            <table>
+                <tr>
+                    <th> <div>Port</div> </th>
+                    <th>
+                        <select id="uart_port" title="uart_port" class="uart_dropdown">
+                            <option selected="selected">COM1</option>
+                            <option>COM2</option>
+                            <option>COM3</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th> <div>Baud rate (bps)</div> </th>
+                    <th>
+                        <select id="uart_baud_rate" title="uart_baud_rate" class="uart_dropdown">
+                            <option>4800</option>
+                            <option>9600</option>
+                            <option selected="selected">19200</option>
+                            <option>38400</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th> <div>Byte size (bits)</div> </th>
+                    <th>
+                        <select id="uart_byte_size" title="uart_byte_size" class="uart_dropdown">
+                            <option>7</option>
+                            <option selected="selected">8</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th> <div>Parity (Y/N)</div> </th>
+                    <th>
+                        <select id="uart_parity" title="uart_parity" class="uart_dropdown">
+                            <option selected="selected">N</option>
+                            <option>Y</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th> <div>Stop bits (bits)</div> </th>
+                    <th>
+                        <select id="uart_stop_bits" title="uart_stop_bits" class="uart_dropdown">
+                            <option selected="selected">1</option>
+                            <option>2</option>
+                        </select>
+                    </th>
+                </tr>
+                <tr>
+                    <th> <div>Timeout (sec)</div> </th>
+                    <th>
+                        <input type="text" name="uart_timeout" id="uart_timeout" title="uart_timeout" value="0" class="uart_dropdown">
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <h3>Message console</h3>
+            <textarea id="textarea_log" rows="10" style="min-width:100%" readonly title="textarea_log">
+            </textarea>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="padding:32px">
+    <div class="row">
+        <div class="col-sm-12" align="center">
+            <input type="button" class="btn btn-danger" id="button_uart_check" value="UART PORT CHECK" style="margin:10px">
+            <input type="button" class="btn btn-primary" id="button_run" value="Run" style="margin:10px">
+            <input type="button" class="btn btn-success" id="button_load" value="Load" style="margin:10px">
+            <input type="text" name="save_filename" id="save_filename" title="save_filename" value="noname" style="text-align:right">
+            .ini
+            <input type="button" class="btn btn-info" id="button_save" value="Save" style="margin:10px">
+            <input type="button" class="btn btn-warning" id="button_exit" value="Exit" style="margin:10px">
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<input type="file" id="file_browser" onchange="onFileSelected(this)">
+<script type="text/javascript" src="srs_gui.js"></script>
+</body>
+</html>
+
+
