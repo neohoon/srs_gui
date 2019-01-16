@@ -5,15 +5,22 @@
     <title>SRS Board Control</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    <script type="text/javascript" src="jquery.3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.3.3.1.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-    <script src="bootstrap.4.0.0.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="bootstrap.4.0.0.min.css">
+    <script src="js/bootstrap.min.js"></script>
+
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-grid.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-reboot.min.css"/>
+    -->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
     <!-- <link rel="stylesheet" type="text/css" href="srs_gui.css"/> -->
     <link rel="shortcut icon" href="about:blank"/>
 
+    <!--
     <style>
         #file_browser {
             display: none;
@@ -30,6 +37,7 @@
             font-weight: normal;
         }
     </style>
+    -->
 
 </head>
 
@@ -160,6 +168,7 @@
     <div class="row">
         <div class="col-sm-12" align="center">
             <input type="button" class="btn btn-danger" id="button_uart_check" value="UART PORT CHECK" style="margin:10px">
+            <input type="button" class="btn btn-danger" id="button_reset" value="Reset" style="margin:10px">
             <input type="button" class="btn btn-primary" id="button_run" value="Run" style="margin:10px">
             <input type="button" class="btn btn-success" id="button_load" value="Load" style="margin:10px">
             <input type="text" name="save_filename" id="save_filename" title="save_filename" value="noname" style="text-align:right">
@@ -173,7 +182,7 @@
 <br>
 <br>
 <input type="file" id="file_browser" onchange="onFileSelected(this)">
-<script type="text/javascript" src="srs_gui.js"></script>
+<script type="text/javascript" src="js/srs_gui.js"></script>
 </body>
 </html>
 

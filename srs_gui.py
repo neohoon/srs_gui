@@ -57,7 +57,7 @@ class MyHandler(BaseHTTPRequestHandler):
         real_path = '.' + self.path
         if real_path.split('/')[1] == '':
             real_path += DEFAULT_HTML
-        print("do_GET.path is " + self.path + " -> " + real_path)
+        print("do_GET.path: " + real_path)
         with open(real_path, 'r') as f:
             data = f.read()
         self.wfile.write(data.encode())
@@ -171,7 +171,7 @@ def run_browser(url):
 
 
 def run_server(server=None):
-    print('Started http server on port ', PORT_NUMBER)
+    print('Started http server on port {:d}'.format(PORT_NUMBER))
     try:
         # Wait forever for incoming http requests
         server.serve_forever()
@@ -200,7 +200,7 @@ def run_client(url):
         raise EnvironmentError('Unsupported OS platform')
 
 
-def run(server_class=HTTPServer, handler_class=MyHandler, port=8080):
+def run(server_class=HTTPServer, handler_class=MyHandler, port=PORT_NUMBER):
     server_address = ('', port)
     server = server_class(server_address, handler_class)
     url = "http://localhost:{}".format(port)
