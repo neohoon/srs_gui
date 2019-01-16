@@ -28,4 +28,4 @@
 * You can distribute zip file to any customer.
 ### Notice
 * SRS_GUI operation was confirmed on OSX.
-* SRS_GUI operation was confirmed on Windows 10. But...
+* SRS_GUI operation was confirmed on Windows 10. But... ^^
