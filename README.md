@@ -1,7 +1,7 @@
 # GUI for Smart Rader System
 
 ## System Description
-   Refer to System Description pdf file.
+   Refer to System Description pdf file, "SRS GUI System Description V0.1 181231.pdf"
    
 ## How to Make Distribution Package on Windows, Linux, or OSX.
 
