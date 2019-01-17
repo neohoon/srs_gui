@@ -7,10 +7,9 @@
 
 ### Prerequisites
 * In order to make executable on Windows, Linux, or OSX, Python interpreter and appropriate Python packages are needed.
-* Anaconda, open source distribution of Python, is strongly recommended.  
-  Refer to https://www.anaconda.com/
-* Install anaconda of Python 3.7.  
-  Refer to https://conda.io/docs/user-guide/install/index.html#id2
+* Anaconda3 4.4.0, open source distribution of Python 3.6, is strongly recommended.  
+* Install anaconda of Python 3.6.  
+  Download "Anaconda3-4.4.0" in https://repo.anaconda.com/archive/ and execute it.  
 * Install following Python package(s) for SRS_GUI.
   - pyserial  
   - pyinstaller 
