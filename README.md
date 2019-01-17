@@ -21,6 +21,8 @@
 ### Make Executable
 * Run following commands in the SRS_GUI root folder.  
   $ pyinstaller --onefile srs_gui.py
+* To validate the executable,   
+  copy dist/srs_gui.exe to SRS_GUI root folder and run it in SRS_GUI root folder.
 ### Zip necessary files and folders.
 * copy dist/srs_gui.exe to SRS_GUI root folder.
 * zip srs_gui.exe, srs_gui.thml, js folder, and css folder.
