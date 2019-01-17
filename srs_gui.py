@@ -22,7 +22,7 @@ import webbrowser
 import configparser
 import json
 
-PORT_NUMBER = 8080
+PORT_NUMBER = 50159
 DEFAULT_HTML = "srs_gui.html"
 if sys.platform.startswith('win'):
     CLIENT_EXE_FNAME = "client.bat"
@@ -183,7 +183,7 @@ def run_server(server=None):
 def run_client(url):
     try:
         os.remove(CLIENT_EXE_FNAME)
-    except all:
+    except FileNotFoundError:
         pass
     if sys.platform.startswith('win'):
         with open(CLIENT_EXE_FNAME, "w") as fid:
